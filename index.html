@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>测试</title>
+        <style>
+    body {
+        max-width:800px;
+        margin: 0 auto;
+        object-fit: fill;
+        background-image: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.xuesai.cn%2Finfor_images%2Fimage%2F20180716180935.jpg&refer=http%3A%2F%2Fwww.xuesai.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655539331&t=ae4f8155e7899b6fe6b8947bd030f423");
+    }
+
+
+</style>
+    </head>
+    <body>
+        <h1>WJ型扣件、扣件帽、垫片检测系统</h1>
+        <div>
+            <form method="post" action="https://hz-t3.matpool.com:27222/upload_image" enctype="multipart/form-data" style="margin: 0 auto">
+               <input type="file"  value="选择检测图片"  class="btn-gradient red block" style="margin:0 auto;" size="40" id="select_files" name="input_image" onchange="show_selectedImage()"/>
+               <br>
+               <canvas id="image_canvas" height="180" width="420" style="margin-top: 20px;margin-left: 30px"></canvas>
+               <text name="image_className" value=""/>
+               <br>
+               <input type="submit" class="btn-gradient blue block" value="开始预测" style="margin:0 auto;"/>
+            </form>
+
+            <script type="text/javascript">
+                function show_selectedImage(){
+                    /// get select files.
+                    var selected_files = document.getElementById("select_files").files;
+                    for(var file of selected_files){
+                        console.log(file.webkitRelativePath);
+                        /// read file content.
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onloadend = function(){
+                            /// deal data.
+                            var img = new Image();
+                            /// after loader, result storage the file content result.
+                            img.src = this.result;
+                            img.onload = function(){
+                                var canvas = document.getElementById("image_canvas");
+                                var cxt = canvas.getContext('2d');
+                                cxt.drawImage(img, 0, 0);
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </body>
+</html>
